@@ -35,6 +35,7 @@ return {
       vim.keymap.set('n', '<C-p>', builtin.find_files, {})
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>sr', builtin.resume, {})
+      vim.keymap.set('n', '<leader>gr', builtin.lsp_references, { desc = 'Telescope LSP references' })
       vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
       require("telescope").load_extension("ui-select")
     end
