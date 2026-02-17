@@ -3,7 +3,7 @@ return {
   config = function()
     require("lualine").setup({
       options = {
-        theme = 'vague'
+        theme = 'auto'  -- automatically uses the current colorscheme
       }
     })
   end

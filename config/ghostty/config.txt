@@ -44,6 +44,6 @@
 
 font-family = Typestar
 font-size = 12
-theme = vague.txt
+theme = substrata.txt
 window-width = 900
 window-height = 1000
