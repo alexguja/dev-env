@@ -24,13 +24,17 @@ return {
       dashboard.button("r", "  Recent Files", ":Telescope oldfiles<CR>"),
       dashboard.button("c", "  Config", ":e $MYVIMRC<CR>"),
       dashboard.button("s", "  Restore Session", ":SessionRestore<CR>"),
-      dashboard.button("L", "󰒲  Lazy", ":Lazy<CR>"),
+      dashboard.button("L", "󰒲 Lazy", ":Lazy<CR>"),
       dashboard.button("q", "  Quit", ":qa<CR>"),
     }
 
     dashboard.section.header.opts.hl = "AlphaHeader"
     dashboard.section.buttons.opts.hl = "AlphaButtons"
     dashboard.section.footer.opts.hl = "AlphaFooter"
+
+    for _, button in ipairs(dashboard.section.buttons.val) do
+      button.opts.cursor = 2
+    end
 
     alpha.setup(dashboard.opts)
 
