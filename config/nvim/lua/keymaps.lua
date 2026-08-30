@@ -29,5 +29,11 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", opts)
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 
 
+-- Clear search highlighting
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
+
+-- Change word under cursor to backticks
+vim.keymap.set("n", "<leader>`", 'ciw`<C-r>"`<Esc>', { noremap = true })
+
 -- Code Actions
 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
