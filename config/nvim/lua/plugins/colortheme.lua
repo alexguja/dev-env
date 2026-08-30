@@ -1,17 +1,18 @@
--- Monochrome take on vague: syntax flattened to a greyscale ramp so
--- structure reads through lightness, not hue. Diagnostics and git
--- colours are left to vague so they still stand out.
+-- Tinted-mono take on vague: the old greyscale ramp, but each step
+-- blended ~35% back towards vague's original hue, so structure still
+-- reads through lightness while a little colour comes through.
+-- Diagnostics and git colours are left to vague so they still stand out.
 local mono = {
-  ghost = "#5a5a64", -- comments: visible, ignorable
-  faint = "#8a8a94", -- punctuation-level: operators
-  dim = "#8a8a98", -- structural chrome: keywords, icons, root paths
-  muted = "#9a9aa2", -- strings
-  soft = "#a0a0ac", -- parameters, empty folders
-  mid = "#a6a6b4", -- types, builtins, symlinks
-  strong = "#adadb8", -- numbers
-  bold = "#b0b0c0", -- constants
-  bright = "#b8b8c4", -- properties, directories
-  peak = "#c0c0ca", -- functions, special/exec files
+  ghost = "#5c5c6b", -- comments: visible, ignorable
+  faint = "#8c929f", -- punctuation-level: operators
+  dim = "#808da1", -- structural chrome: keywords, icons, root paths
+  muted = "#b5a399", -- strings
+  soft = "#a99fb2", -- parameters, empty folders
+  mid = "#a2abb7", -- types, builtins, symlinks
+  strong = "#bfaa9a", -- numbers
+  bold = "#afafc6", -- constants
+  bright = "#bcbcca", -- properties, directories
+  peak = "#c1aab1", -- functions, special/exec files
 }
 
 return {
