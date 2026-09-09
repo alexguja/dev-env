@@ -1,0 +1,30 @@
+# Thorn (forest) for Ghostty
+# ---------------------------
+# Built from thorn.nvim's forest palette
+# (https://github.com/jpwol/thorn.nvim, lua/thorn/colors.lua),
+# matching the thorn setup in config/nvim/lua/plugins/colortheme.lua:
+# magenta carries the Old Irony copper used for keywords in nvim,
+# and everything is dimmed by 10% like the nvim theme.
+
+palette = 0=#142122
+palette = 1=#BD5E61
+palette = 2=#639682
+palette = 3=#E5C199
+palette = 4=#82B0AC
+palette = 5=#B7886C
+palette = 6=#79B69F
+palette = 7=#8B8A7E
+palette = 8=#4D7564
+palette = 9=#BD5E61
+palette = 10=#639682
+palette = 11=#E5C199
+palette = 12=#82B0AC
+palette = 13=#B7886C
+palette = 14=#79B69F
+palette = 15=#C5BDB3
+
+background = #142122
+foreground = #C5BDB3
+cursor-color = #C5BDB3
+selection-background = #223937
+selection-foreground = #C5BDB3

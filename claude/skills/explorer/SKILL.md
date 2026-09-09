@@ -115,21 +115,43 @@ Purpose: key details about one service at a time. Run once per service the user 
 
 Process: the full triad at depth. Enumerate every entry point with its trigger. Map the data: streams, projections, other stores, and their schemas. Read the domain logic files properly: aggregates, lifecycle events, invariants, policies. Trace one or two representative paths end to end (entry point → domain logic → data → events out). Then enrich with corroborating sources: recent Linear tickets touching the service, relevant Confluence pages, and past incidents/bug fixes, which reveal the sharp edges no amount of code reading surfaces quickly.
 
-Artefact: one file per service, `L3-<service-name>.md`:
+L3 must leave the reader able to navigate the service without help. Three requirements beyond the triad:
+
+1. **Entry-point paths, not just a list.** For each significant entry point, walk the reader from the outside world to the domain logic as a short numbered sequence: one hop per line, a plain sentence per hop saying what happens there, with the symbol and `file:line` cited so each hop is clickable. Never compress a path into a single arrow chain (`A → B → C → D`); beyond three hops those are unreadable. Anchor each path with a short verbatim snippet (3-10 lines, `file:line` cited) of the hop where routing actually happens - the dispatch switch, route table, or handler binding - so the reader sees the mechanism that connects the hops, not just a chain of names. Every hop must be a symbol that exists.
+2. **All moving parts, briefly.** Every runtime component the service comprises (handlers, workers, consumers, schedulers, caches, outbox processors, background loops) gets one or two sentences: what it does, when it runs, what it touches. Nothing that executes at runtime should be absent from the artefact.
+3. **Snippets of the most important activity.** Include short verbatim code excerpts (5-15 lines each, with `file:line` reference) for the three to six places where the service's real work happens: the core state transition, the trickiest invariant or policy decision, the main write path, the key event publication or consumption. Place each snippet inline in the section that discusses it, never in a standalone snippet section. Choose snippets a new engineer would otherwise take days to find; trim boilerplate, never paraphrase or invent code.
+4. **A full trace through the service.** Pick the one most representative operation and narrate it end to end: from the trigger arriving, through every layer it crosses, every branch that matters, to the data written and events emitted. This is a story with file:line waypoints, not a diagram; the reader should be able to follow it in an editor with the artefact open beside them.
+5. **A reading guide.** Tell the reader where to start digging on their own: the first three files to open and in what order, which directories hold what, which symbol to `findReferences` on to unlock the domain, and which files look important but can be safely skimmed. Write it as advice to a new engineer on day one, not as a directory listing.
+
+Artefact: one file per service, `L3-<service-name>.md`. The section order below is fixed - navigation content first, reference material after - and every section is mandatory (write "None found" rather than dropping one):
 
 ```markdown
 # L3 - [Service name]
 ## Purpose and ownership
 [What it does; which aggregates/entities it owns, based on where lifecycle events are created]
+## Where to start digging
+[The on-ramp, so it comes early. Advice for a new engineer: first three files to open and
+ in what order, what each directory holds, which symbol to find-references on to unlock
+ the domain, what to skim]
 ## Entry points
 [Table: entry point | trigger (HTTP/event/cron/manual) | what it does | file path]
+## Entry-point paths
+[Per significant entry point: numbered hops, one plain sentence per hop with file:line,
+ anchored by a verbatim snippet of the routing hop (dispatch switch, route table,
+ handler binding). Never a single arrow chain]
+## Moving parts
+[One or two sentences per runtime component: what it does, when it runs, what it touches]
 ## Internal structure
 [mermaid graph of modules/layers and their dependencies]
+## Trace: [representative operation]
+[End-to-end narrative of one representative operation, from trigger to data written and
+ events emitted, with file:line waypoints at every layer crossing and meaningful branch]
+## Data
+[Event streams, projections/read models, other stores; who writes, who reads; the key
+ queries, with snippets where they carry policy]
 ## Aggregates and domain logic
 [Per aggregate: lifecycle events published (with file paths), key invariants and policies;
  stateDiagram where the lifecycle is non-trivial]
-## Data
-[Event streams, projections/read models, other stores; who writes, who reads]
 ## Consumed events and side effects
 ## Configuration and external dependencies
 ## Lessons from tickets and incidents
@@ -137,6 +159,8 @@ Artefact: one file per service, `L3-<service-name>.md`:
 ## Notable implementation details and risks
 ## Open questions
 ```
+
+There is no standalone snippet section: the 3-6 required verbatim snippets live inline in whichever section discusses them (entry-point paths, trace, data, domain logic).
 
 ## Working across multiple codebases
 
